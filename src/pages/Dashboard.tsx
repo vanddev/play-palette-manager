@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight, 
-  Controller, 
+  Gamepad, 
   Clock, 
   Check, 
   X, 
@@ -35,7 +35,7 @@ const Dashboard: React.FC<DashboardProps> = ({ games, onStatusChange }) => {
           <StatsCard
             title="Total Games"
             value={stats.totalGames}
-            icon={<Controller className="h-5 w-5" />}
+            icon={<Gamepad className="h-5 w-5" />}
             description="Games in your collection"
           />
           
@@ -99,7 +99,7 @@ const Dashboard: React.FC<DashboardProps> = ({ games, onStatusChange }) => {
             >
               <div className="flex items-center">
                 <div className="h-10 w-10 rounded-full flex items-center justify-center bg-primary/10 text-primary mr-4">
-                  <Controller className="h-5 w-5" />
+                  <Gamepad className="h-5 w-5" />
                 </div>
                 <div>
                   <h3 className="font-medium">Game Library</h3>
