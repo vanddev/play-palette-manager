@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { 
@@ -10,7 +9,7 @@ import {
   Check, 
   X, 
   Heart,
-  GameController,
+  Gamepad,
   Trophy
 } from 'lucide-react';
 import { Game, GameStatus, initialGames } from '../utils/gameData';
@@ -62,7 +61,6 @@ const GameDetail: React.FC<GameDetailProps> = ({ games, onStatusChange }) => {
   
   const StatusIcon = statusConfig[game.status].icon;
   
-  // Mock screenshots for the game
   const mockScreenshots = [
     {
       id: 1,
@@ -96,7 +94,6 @@ const GameDetail: React.FC<GameDetailProps> = ({ games, onStatusChange }) => {
       </div>
       
       <div className="flex flex-col lg:flex-row gap-8">
-        {/* Left Section - Cover Image & Status */}
         <div className="w-full lg:w-1/3">
           <div className="glass-card rounded-lg overflow-hidden">
             <div className="aspect-[3/4] relative">
@@ -146,7 +143,6 @@ const GameDetail: React.FC<GameDetailProps> = ({ games, onStatusChange }) => {
           </div>
         </div>
         
-        {/* Right Section - Game Details */}
         <div className="w-full lg:w-2/3">
           <h1 className="text-3xl font-bold mb-2">{game.title}</h1>
           
@@ -157,7 +153,7 @@ const GameDetail: React.FC<GameDetailProps> = ({ games, onStatusChange }) => {
             </div>
             
             <div className="bg-primary/10 text-primary text-sm px-3 py-1 rounded-full flex items-center">
-              <GameController className="h-3 w-3 mr-1" />
+              <Gamepad className="h-3 w-3 mr-1" />
               {game.genre}
             </div>
             
