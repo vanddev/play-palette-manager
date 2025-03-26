@@ -1,4 +1,3 @@
-
 export enum GameStatus {
   FINISHED = 'finished',
   WISHLIST = 'wishlist',
@@ -15,6 +14,7 @@ export interface Game {
   rating?: number;
   status: GameStatus;
   playTime?: number;
+  description?: string;
 }
 
 // Mock game data

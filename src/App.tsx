@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
 import Library from "./pages/Library";
+import GameDetail from "./pages/GameDetail";
 import Recommendations from "./pages/Recommendations";
 import Statistics from "./pages/Statistics";
 import NotFound from "./pages/NotFound";
@@ -68,6 +69,7 @@ const App = () => {
             <Route path="/" element={<Layout />}>
               <Route index element={<Dashboard games={games} onStatusChange={handleStatusChange} />} />
               <Route path="library" element={<Library games={games} onStatusChange={handleStatusChange} />} />
+              <Route path="game/:id" element={<GameDetail games={games} onStatusChange={handleStatusChange} />} />
               <Route path="recommendations" element={<Recommendations games={games} onAddToWishlist={handleAddToWishlist} />} />
               <Route path="statistics" element={<Statistics games={games} />} />
             </Route>
