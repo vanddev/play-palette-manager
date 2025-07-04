@@ -5,6 +5,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { ThemeProvider } from "./components/ThemeProvider";
 import { Layout } from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
 import Library from "./pages/Library";
@@ -61,22 +62,24 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Dashboard games={games} onStatusChange={handleStatusChange} />} />
-              <Route path="library" element={<Library games={games} onStatusChange={handleStatusChange} />} />
-              <Route path="game/:id" element={<GameDetail games={games} onStatusChange={handleStatusChange} />} />
-              <Route path="recommendations" element={<Recommendations games={games} onAddToWishlist={handleAddToWishlist} />} />
-              <Route path="statistics" element={<Statistics games={games} />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+      <ThemeProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Dashboard games={games} onStatusChange={handleStatusChange} />} />
+                <Route path="library" element={<Library games={games} onStatusChange={handleStatusChange} />} />
+                <Route path="game/:id" element={<GameDetail games={games} onStatusChange={handleStatusChange} />} />
+                <Route path="recommendations" element={<Recommendations games={games} onAddToWishlist={handleAddToWishlist} />} />
+                <Route path="statistics" element={<Statistics games={games} />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 };

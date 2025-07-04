@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { LayoutGrid, Library, Sparkles, BarChart2 } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
 
 export const Navbar: React.FC = () => {
   const location = useLocation();
@@ -46,6 +47,10 @@ export const Navbar: React.FC = () => {
             );
           })}
         </nav>
+        
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );
