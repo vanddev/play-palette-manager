@@ -28,7 +28,7 @@ export const GameCard: React.FC<GameCardProps> = ({ game, onStatusChange }) => {
     },
   };
   
-  const StatusIcon = statusConfig[game.status].icon;
+  const StatusIcon = game.status ? statusConfig[game.status].icon : null;
   
   return (
     <div className="glass-card rounded-lg overflow-hidden transition-all duration-300 hover:shadow-md group animate-scale-in">
@@ -75,10 +75,16 @@ export const GameCard: React.FC<GameCardProps> = ({ game, onStatusChange }) => {
         </Link>
         
         <div className="flex items-center justify-between mt-4">
-          <div className={`status-chip ${statusConfig[game.status].color} flex items-center gap-1`}>
-            <StatusIcon className="h-3 w-3" />
-            <span>{statusConfig[game.status].label}</span>
-          </div>
+          {game.status ? (
+            <div className={`status-chip ${statusConfig[game.status].color} flex items-center gap-1`}>
+              <StatusIcon className="h-3 w-3" />
+              <span>{statusConfig[game.status].label}</span>
+            </div>
+          ) : (
+            <div className="status-chip bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400 flex items-center gap-1">
+              <span>Untracked</span>
+            </div>
+          )}
           
           <div className="flex space-x-1">
             <button 

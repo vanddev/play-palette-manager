@@ -12,7 +12,7 @@ export interface Game {
   platform?: string;
   releaseYear?: number;
   rating?: number;
-  status: GameStatus;
+  status?: GameStatus; // Made optional to allow untracked games
   playTime?: number;
   description?: string;
 }
@@ -175,6 +175,46 @@ export const initialGames: Game[] = [
     releaseYear: 2023,
     rating: 6.5,
     status: GameStatus.DISLIKED
+  },
+  {
+    id: 16,
+    title: "Alan Wake 2",
+    imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?q=80&w=1000",
+    genre: "Survival Horror",
+    platform: "Multiple",
+    releaseYear: 2023,
+    rating: 9.1
+    // No status - untracked
+  },
+  {
+    id: 17,
+    title: "Super Mario Bros. Wonder",
+    imageUrl: "https://images.unsplash.com/photo-1606503153255-59d8b8b82176?q=80&w=1000",
+    genre: "Platformer",
+    platform: "Nintendo Switch",
+    releaseYear: 2023,
+    rating: 9.2
+    // No status - untracked
+  },
+  {
+    id: 18,
+    title: "Lies of P",
+    imageUrl: "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?q=80&w=1000",
+    genre: "Action RPG",
+    platform: "Multiple",
+    releaseYear: 2023,
+    rating: 8.7
+    // No status - untracked
+  },
+  {
+    id: 19,
+    title: "Pizza Tower",
+    imageUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?q=80&w=1000",
+    genre: "Platformer",
+    platform: "Multiple",
+    releaseYear: 2023,
+    rating: 8.9
+    // No status - untracked
   }
 ];
 

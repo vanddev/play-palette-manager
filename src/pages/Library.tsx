@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Check, Clock, X, Search, Filter } from 'lucide-react';
+import { Check, Clock, X, Search, Filter, Plus } from 'lucide-react';
 import { GameList } from '../components/GameList';
 import { Game, GameStatus } from '../utils/gameData';
 
@@ -26,6 +25,7 @@ const Library: React.FC<LibraryProps> = ({ games, onStatusChange }) => {
   });
   
   // Group games by status
+  const untrackedGames = filteredGames.filter(game => !game.status);
   const finishedGames = filteredGames.filter(game => game.status === GameStatus.FINISHED);
   const wishlistGames = filteredGames.filter(game => game.status === GameStatus.WISHLIST);
   const dislikedGames = filteredGames.filter(game => game.status === GameStatus.DISLIKED);
@@ -75,6 +75,18 @@ const Library: React.FC<LibraryProps> = ({ games, onStatusChange }) => {
           </div>
         </div>
       </div>
+      
+      <GameList
+        title="Untracked Games"
+        icon={<Plus className="h-5 w-5 text-gray-600" />}
+        games={untrackedGames}
+        onStatusChange={onStatusChange}
+        emptyMessage={
+          searchQuery || filterGenre
+            ? "No untracked games match your filters"
+            : "All games have been categorized"
+        }
+      />
       
       <GameList
         title="Finished Games"
