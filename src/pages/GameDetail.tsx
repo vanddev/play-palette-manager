@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { 
@@ -59,7 +60,7 @@ const GameDetail: React.FC<GameDetailProps> = ({ games, onStatusChange }) => {
     },
   };
   
-  const StatusIcon = statusConfig[game.status].icon;
+  const StatusIcon = game.status ? statusConfig[game.status].icon : null;
   
   const mockScreenshots = [
     {
@@ -103,10 +104,16 @@ const GameDetail: React.FC<GameDetailProps> = ({ games, onStatusChange }) => {
                 className="w-full h-full object-cover"
               />
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-4">
-                <div className={`status-chip ${statusConfig[game.status].color} inline-flex items-center gap-1`}>
-                  <StatusIcon className="h-3 w-3" />
-                  <span>{statusConfig[game.status].label}</span>
-                </div>
+                {game.status ? (
+                  <div className={`status-chip ${statusConfig[game.status].color} inline-flex items-center gap-1`}>
+                    <StatusIcon className="h-3 w-3" />
+                    <span>{statusConfig[game.status].label}</span>
+                  </div>
+                ) : (
+                  <div className="status-chip bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400 inline-flex items-center gap-1">
+                    <span>Untracked</span>
+                  </div>
+                )}
               </div>
             </div>
             
