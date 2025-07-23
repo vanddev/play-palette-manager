@@ -1,9 +1,29 @@
 
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+} from 'chart.js';
+import { Bar, Pie } from 'react-chartjs-2';
 import { Clock, Award, Gamepad, Monitor, BarChart2 } from 'lucide-react';
 import { StatsCard } from '../components/StatsCard';
 import { Game, getStatistics } from '../utils/gameData';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement
+);
 
 interface StatisticsProps {
   games: Game[];
@@ -14,6 +34,56 @@ const Statistics: React.FC<StatisticsProps> = ({ games }) => {
   
   // Colors for charts
   const COLORS = ['#3b82f6', '#10b981', '#f97316', '#8b5cf6', '#ec4899'];
+  
+  // Pie chart data for genres
+  const genreChartData = {
+    labels: stats.genreBreakdown.map(item => item.genre),
+    datasets: [
+      {
+        data: stats.genreBreakdown.map(item => item.count),
+        backgroundColor: COLORS,
+        borderWidth: 0,
+      },
+    ],
+  };
+  
+  // Bar chart data for platforms
+  const platformChartData = {
+    labels: stats.platformBreakdown.map(item => item.platform),
+    datasets: [
+      {
+        label: 'Games',
+        data: stats.platformBreakdown.map(item => item.count),
+        backgroundColor: '#3b82f6',
+        borderRadius: 4,
+      },
+    ],
+  };
+  
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom' as const,
+      },
+    },
+  };
+  
+  const barChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
   
   return (
     <div className="animate-fade-in">
@@ -55,27 +125,7 @@ const Statistics: React.FC<StatisticsProps> = ({ games }) => {
           <h2 className="text-xl font-medium mb-6">Genre Breakdown</h2>
           <div className="h-80">
             {stats.genreBreakdown.length > 0 ? (
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={stats.genreBreakdown}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    dataKey="count"
-                    nameKey="genre"
-                    label={({ genre, percentage }) => `${genre}: ${percentage}%`}
-                  >
-                    {stats.genreBreakdown.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip formatter={(value) => [`${value} games`, 'Count']} />
-                  <Legend />
-                </PieChart>
-              </ResponsiveContainer>
+              <Pie data={genreChartData} options={chartOptions} />
             ) : (
               <div className="h-full flex items-center justify-center">
                 <p className="text-muted-foreground">No data available</p>
@@ -88,14 +138,7 @@ const Statistics: React.FC<StatisticsProps> = ({ games }) => {
           <h2 className="text-xl font-medium mb-6">Platform Distribution</h2>
           <div className="h-80">
             {stats.platformBreakdown.length > 0 ? (
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={stats.platformBreakdown}>
-                  <XAxis dataKey="platform" />
-                  <YAxis />
-                  <Tooltip formatter={(value) => [`${value} games`, 'Count']} />
-                  <Bar dataKey="count" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
+              <Bar data={platformChartData} options={barChartOptions} />
             ) : (
               <div className="h-full flex items-center justify-center">
                 <p className="text-muted-foreground">No data available</p>
