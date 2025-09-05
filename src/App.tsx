@@ -68,7 +68,7 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Layout />}>
+              <Route path="/" element={<Layout games={games} onStatusChange={handleStatusChange} />}>
                 <Route index element={<Dashboard games={games} onStatusChange={handleStatusChange} />} />
                 <Route path="library" element={<Library games={games} onStatusChange={handleStatusChange} />} />
                 <Route path="game/:id" element={<GameDetail games={games} onStatusChange={handleStatusChange} />} />
