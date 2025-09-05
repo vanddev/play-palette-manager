@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Check, Clock, X, Search, Filter, Plus } from 'lucide-react';
+import { Check, Clock, X, Search, Filter, Plus, Download } from 'lucide-react';
 import { GameList } from '../components/GameList';
 import { Game, GameStatus } from '../utils/gameData';
 
@@ -33,7 +33,13 @@ const Library: React.FC<LibraryProps> = ({ games, onStatusChange }) => {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-6">Game Library</h1>
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-3xl font-bold">Game Library</h1>
+          <button className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
+            <Download className="h-4 w-4" />
+            Import Games
+          </button>
+        </div>
         
         <div className="flex flex-col md:flex-row gap-4">
           {/* Search */}
